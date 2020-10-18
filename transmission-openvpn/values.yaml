@@ -3,34 +3,11 @@
 replicaCount: 1
 
 image:
-  repository: haugene/transmission-openvpn
-  tag: latest
+  repository: linuxserver/transmission
+  tag: amd64-latest
   pullPolicy: IfNotPresent
 
-dnsPolicy: "None"
-
-dnsConfig:
-  nameservers:
-    - 8.8.8.8
-    - 8.8.4.4
-
 env:
-  - name: OPENVPN_PROVIDER
-    value: "CUSTOM"
-  - name: OPENVPN_CONFIG
-    value: "Netherlands"
-  - name: OPENVPN_USERNAME
-    value: "foo"
-  - name: OPENVPN_PASSWORD
-    value: "foo"
-  - name: TRANSMISSION_RPC_USERNAME
-    value: "foo"
-  - name: TRANSMISSION_RPC_PASSWORD
-    value: "foo"
-  - name: TRANSMISSION_PEER_PORT
-    value: "47444"
-  - name: TRANSMISSION_RPC_AUTHENTICATION_REQUIRED
-    value: "true"
   - name: TRANSMISSION_DOWNLOAD_DIR
     value: "/downloads/transmission"
   - name: PUID
@@ -80,9 +57,6 @@ volumes:
   - name: config
     secret:
       secretName: "openvpn-common-config"
-  - name: dev-tun
-    hostPath:
-      path: "/dev/net/tun"
 
 volumeMounts:
     - name: myvolume
@@ -99,9 +73,6 @@ volumeMounts:
 
 # Security context for container
 securityContext:
-  capabilities:
-    add:
-      - NET_ADMIN
 
 # Security context for pod
 # Can be used to allow ipv6 for openvpn, because

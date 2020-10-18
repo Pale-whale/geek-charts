@@ -14,6 +14,12 @@ spec:
       targetPort: 9091
       protocol: TCP
       name: http
+    - port: 51413
+      targetPort: 51413
+      protocol: TCP
+    - port: 51413
+      targetPort: 51413
+      protocol: UDP
   selector:
     app: {{ template "transmission-openvpn.name" . }}
     release: {{ .Release.Name }}
