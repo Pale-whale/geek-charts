@@ -36,6 +36,12 @@ spec:
             - name: http
               containerPort: 9091
               protocol: TCP
+            - containerPort: 51413
+              name: transmi
+              protocol: UDP
+            - containerPort: 51413
+              name: trans-tcp
+              protocol: TCP
           securityContext:
 {{ toYaml .Values.securityContext | indent 12 }}
           volumeMounts:
